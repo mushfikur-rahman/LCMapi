@@ -5,14 +5,14 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
-COPY ["BackEndProject/BackEndProject.csproj", "BackEndProject/"]
-RUN dotnet restore "BackEndProject/BackEndProject.csproj"
+COPY ["LCMapi/LCMapi.csproj", "LCMapi/"]
+RUN dotnet restore "LCMapi/LCMapi.csproj"
 COPY . .
-WORKDIR "/src/BackEndProject"
-RUN dotnet build "BackEndProject.csproj" -c Release -o /app/build
+WORKDIR "/src/LCMapi"
+RUN dotnet build "LCMapi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "BackEndProject.csproj" -c Release -o /app/publish
+RUN dotnet publish "LCMapi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
